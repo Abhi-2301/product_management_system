@@ -30,4 +30,64 @@ public class ProductDao {
 	{
 		return jpa.findById(id);
 	}
+	
+	public Product deleteProductById(int id)
+	{
+		Optional<Product> e = jpa.findById(id);
+		if(e.isPresent())
+		{
+			Product p = e.get();
+			jpa.deleteById(id);
+			return p;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public Product updateProductById(int id,Product p)
+	{
+		Optional<Product> p1 = jpa.findById(id);
+		if(p1.isPresent())
+		{
+			Product p2 = p1.get();
+			p2.setName(p.getName());
+			p2.setP_desc(p.getP_desc());
+			p2.setPrice(p.getPrice());
+			
+			return jpa.save(p2);
+		}
+		else
+		{
+			return null;
+		}
+	}
+	public Product patchProductById(int id,Product p)
+	{
+		Optional<Product> p1 = jpa.findById(id);
+		if(p1.isPresent())
+		{
+			Product p2 = p1.get();
+			p2.setName(p.getName());
+			p2.setP_desc(p.getP_desc());
+			p2.setPrice(p.getPrice());
+			
+			return jpa.save(p2);
+		}
+		else
+		{
+			return null;
+		}
+	}
+	public List<Product> findByName(String name)
+	{
+		return jpa.findByName(name);
+		
+		
+	}
+	public List<Product> findByPriceBetween(double min,double max)
+	{
+		return jpa.findByPriceBetween(min, max);
+	}
 }
