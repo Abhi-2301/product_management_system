@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +29,8 @@ public class ProductController {
 		return service.getAllProducts();
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<ResponseStructure<Product>> findProductById(@PathVariable int id)
+	@GetMapping("get/{id}")
+	public ResponseEntity<ResponseStructure<Product>> findProductById(@PathVariable("id") int id)
 	{
 		return service.findProductById(id);
 	}
@@ -39,7 +40,6 @@ public class ProductController {
 	{
 		return service.saveProduct(p);
 	}
-	
 	
 	
 }

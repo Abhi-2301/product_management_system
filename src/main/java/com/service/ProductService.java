@@ -48,8 +48,7 @@ public class ProductService {
 		Optional<Product> p1 = dao.findProductById(id);
 		if(p1.isPresent())
 		{
-		Product p=p1.get();
-		rs.setData(p);
+		rs.setData(p1.get());
 		rs.setLocaldatetime(LocalDateTime.now());
 		rs.setMessage("data fetched successfully");
 		rs.setStatusCode(HttpStatus.FOUND.value());
