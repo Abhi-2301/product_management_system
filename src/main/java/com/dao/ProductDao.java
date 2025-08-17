@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.entity.Product;
@@ -90,4 +92,12 @@ public class ProductDao {
 	{
 		return jpa.findByPriceBetween(min, max);
 	}
+	
+	public List<Product> findByProductPage(Pageable pageable)
+	{
+		Page<Product> page = jpa.findAll(pageable);
+		return page.getContent();
+	}
+	
+	
 }

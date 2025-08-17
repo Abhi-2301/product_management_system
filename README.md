@@ -15,6 +15,7 @@ Swagger is integrated for easy API documentation and testing.
 - Delete product
 - Find product by name
 - Find products within a price range
+- Pagination and sorting for products
 - Swagger UI for API testing
 
 ---
@@ -32,22 +33,22 @@ Swagger is integrated for easy API documentation and testing.
 1. Clone the repository:
    ```bash
    git clone https://github.com/abhi-2301/product_management_system.git
-   
-2. Import project into Eclipse/IntelliJ as a Maven Project.
+2. Import the project into Eclipse/IntelliJ as a Maven Project.
 3. Configure PostgreSQL database in application.properties.
-4. Run the project as Spring Boot App.
-5. Open Swagger UI in your browser
-	http://localhost:8080/swagger-ui/index.html  
+4. Run the project as a Spring Boot App.
+5.Open Swagger UI in your browser:
+	http://localhost:8080/swagger-ui/index.html
 	
 	
-| Method | Endpoint                      | Description                  |
-| ------ | ----------------------------- | ---------------------------- |
-| GET    | `/products`                   | Get all products             |
-| GET    | `/products/get/{id}`          | Get product by ID            |
-| POST   | `/products/save`              | Create new product           |
-| PUT    | `/products/update/{id}`       | Update product by ID         |
-| PATCH  | `/products/patch/{id}`        | Partially update product     |
-| DELETE | `/products/delete/{id}`       | Delete product by ID         |
-| GET    | `/products/name/{name}`       | Find product by name         |
-| GET    | `/products/price/{min}/{max}` | Find products by price range |
+| Method | Endpoint                                                      | Description                           |
+| ------ | ------------------------------------------------------------- | ------------------------------------- |
+| GET    | `/products`                                                   | Get all products                      |
+| GET    | `/products/get/{id}`                                          | Get product by ID                     |
+| POST   | `/products/save`                                              | Create new product                    |
+| PUT    | `/products/update/{id}`                                       | Update product by ID                  |
+| PATCH  | `/products/patch/{id}`                                        | Partially update product              |
+| DELETE | `/products/delete/{id}`                                       | Delete product by ID                  |
+| GET    | `/products/name/{name}`                                       | Find product by name                  |
+| GET    | `/products/price/{min}/{max}`                                 | Find products by price range          |
+| GET    | `/products/getProductPage/{page}/{size}/{sortBy}/{ascending}` | Get paginated and sorted product list |
 	

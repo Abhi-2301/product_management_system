@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,9 +28,9 @@ public class ProductService {
 		rs.setData(p1);
 		rs.setLocaldatetime(LocalDateTime.now());
 		rs.setMessage("Data Inserted Successfully");
-		rs.setStatusCode(HttpStatus.FOUND.value());
+		rs.setStatusCode(HttpStatus.OK.value());
 		
-		return new ResponseEntity<ResponseStructure<Product>>(rs,HttpStatus.FOUND);
+		return new ResponseEntity<ResponseStructure<Product>>(rs,HttpStatus.OK);
 	}
 	
 	public ResponseEntity<ResponseStructure<List<Product>>> getAllProducts()
@@ -177,6 +179,34 @@ public class ProductService {
 			rs.setStatusCode(HttpStatus.FOUND.value());
 			
 			return new ResponseEntity<ResponseStructure<List<Product>>>(rs,HttpStatus.FOUND);
+		}
+		else
+		{
+			rs.setData(null);
+			rs.setLocaldatetime(LocalDateTime.now());
+			rs.setMessage("data not found");
+			rs.setStatusCode(HttpStatus.NOT_FOUND.value());
+			
+			return new ResponseEntity<ResponseStructure<List<Product>>>(rs,HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	public ResponseEntity<ResponseStructure<List<Product>>> findByProductPage(int page,int size,String sortBy,boolean ascending)
+	{
+		ResponseStructure<List<Product>> rs = new ResponseStructure<>();
+		
+		Sort sort=ascending? Sort.by(sortBy).ascending():Sort.by(sortBy).descending();
+		PageRequest pageable = PageRequest.of(page, size, sort);
+
+		List<Product> products = dao.findByProductPage(pageable);
+		if(!products.isEmpty())
+		{
+			rs.setData(products);
+			rs.setLocaldatetime(LocalDateTime.now());
+			rs.setMessage("data found successfully");
+			rs.setStatusCode(HttpStatus.OK.value());
+			
+			return new ResponseEntity<ResponseStructure<List<Product>>>(rs,HttpStatus.OK);
 		}
 		else
 		{

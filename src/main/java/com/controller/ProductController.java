@@ -42,29 +42,40 @@ public class ProductController {
 	{
 		return service.saveProduct(p);
 	}
+	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<ResponseStructure<Product>> deleteProductById(@PathVariable("id") int id)
 	{
 		return service.deleteProductById(id);
 	}
+	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<ResponseStructure<Product>> updateProductById(@PathVariable("id") int id,@RequestBody Product p)
 	{
 		return service.updateProductById(id, p);
 	}
+	
 	@PatchMapping("/patch/{id}")
 	public ResponseEntity<ResponseStructure<Product>> patchProductById(@PathVariable("id") int id,@RequestBody Product p)
 	{
 		return service.patchProductById(id,p);
 	}
+	
 	@GetMapping("/name/{name}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findProductByName(@PathVariable("name") String name)
 	{
 		return service.findProductByName(name);
 	}
+	
 	@GetMapping("/price/{min}/{max}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findProductByPriceBetween(@PathVariable("min") double min,@PathVariable("max") double max)
 	{
 		return service.findByPriceBetween(min, max);
+	}
+	
+	@GetMapping("/getProductPage/{page}/{size}/{sortBy}/{ascending}")
+	public ResponseEntity<ResponseStructure<List<Product>>> findByProductPage(@PathVariable("page") int page,@PathVariable("size") int size,@PathVariable("sortBy") String sortBy,@PathVariable("ascending") boolean ascending)
+	{
+		return service.findByProductPage(page,size, sortBy, ascending);
 	}
 }
